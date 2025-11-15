@@ -8,13 +8,6 @@ Perfect! Now that we know the structure of your dataset, we can think about addi
 * Ideas:
 
   * **Death counts per map**: Identify the deadliest zones.
-
-    ```python
-    top_maps = df['map_id'].value_counts().head(10)
-    sns.barplot(x=top_maps.index, y=top_maps.values)
-    plt.title('Top 10 Maps by Death Count')
-    plt.show()
-    ```
   * **Death counts per area**: If `area_id` is more granular than `map_id`.
   * **Spatial visualization**: Use `map_pos` coordinates to make a heatmap of death locations.
 
@@ -26,11 +19,6 @@ Perfect! Now that we know the structure of your dataset, we can think about addi
 * Additional ideas:
 
   * **Level at death per class** (boxplot):
-
-    ```python
-    df.replace({'class_id': class_id_to_class_name}).boxplot(column='level', by='class_id', figsize=(12,6))
-    ```
-
     Shows whether some classes tend to die earlier or later than others.
   * **Map vs class**: Are certain classes dying more in specific maps?
 
@@ -54,13 +42,6 @@ Perfect! Now that we know the structure of your dataset, we can think about addi
 
   * **Top sources of death** overall.
   * **Class-specific sources**: Which mobs are most deadly to Warriors vs Hunters.
-
-  ```python
-  top_sources = df['source_id'].value_counts().head(10)
-  sns.barplot(x=top_sources.index, y=top_sources.values)
-  plt.title('Top 10 Sources of Death')
-  plt.show()
-  ```
 
   * If you can map `source_id` → NPC names, you can label plots meaningfully.
 
@@ -100,20 +81,9 @@ Perfect! Now that we know the structure of your dataset, we can think about addi
   * Convert to numeric `(x, y)` columns.
   * Create a **2D density plot / heatmap** of death locations:
 
-    ```python
-    df[['x', 'y']] = pd.DataFrame(df['map_pos'].tolist(), index=df.index)
-    sns.kdeplot(x='x', y='y', data=df, fill=True)
-    plt.title('Heatmap of Death Locations')
-    plt.show()
-    ```
-
 ---
 
-💡 **Overall Idea:** With your data, you can explore **“who dies, where, how, and at what level”**.
-You already have good class- and level-based analysis, so the next big steps are **map/area and source-based visualizations**, especially using `map_pos` for heatmaps.
-
----
-
-If you want, I can **draft a full EDA plan** for your notebook with the exact sequence of plots and insights you could add next, ready to copy.
-
-Do you want me to do that?
+* Top Killer NPCs + killers by level bracket
+* Zone Danger Rating (deaths normalized by zone level range)
+* Survival Curve over Levels (Kaplan–Meier)
+* Dungeon Deaths Breakdown (by dungeon and class)
